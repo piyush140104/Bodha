@@ -1,35 +1,66 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import React from "react";
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = ()=> {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          height: 70,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          position: "absolute",
+          backgroundColor: "#FFFFFF",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              size={26}
+              color={focused ? "#5B4EFF" : "#9CA3AF"}
+            />
+          ),
         }}
       />
+
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={
+                focused
+                  ? "chatbubble-ellipses"
+                  : "chatbubble-ellipses-outline"
+              }
+              size={26}
+              color={focused ? "#5B4EFF" : "#9CA3AF"}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="favorites"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "bookmark" : "bookmark-outline"}
+              size={26}
+              color={focused ? "#F59E0B" : "#9CA3AF"}
+            />
+          ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;

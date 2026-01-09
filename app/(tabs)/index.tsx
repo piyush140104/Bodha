@@ -1,98 +1,173 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import styles from "../../constants/HomeScreen.styles";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
-
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        <View style={styles.header}>
+          <View style={styles.brand}>
+            <View style={styles.brandIcon}>
+              <Ionicons name="book-outline" size={20} color="#C77833" />
+            </View>
+            <View>
+              <Text style={styles.brandTitle}>Bodha</Text>
+              <Text style={styles.brandSubtitle}>
+                Your study companion
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.notification}>
+            <Ionicons name="notifications-outline" size={22} />
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>2</Text>
+            </View>
+          </View>
+        </View>
+
+        <LinearGradient
+          colors={["#C77435", "#9C5824"]}
+          style={styles.goalsCard}
+        >
+          <View style={styles.goalsHeader}>
+            <View style={styles.targetIcon}>
+              <Ionicons name="radio-button-on" size={20} color="#fff" />
+            </View>
+            <View>
+              <Text style={styles.goalsTitle}>
+                Daily Study Goals
+              </Text>
+              <Text style={styles.goalsSubtitle}>
+                1 of 3 completed
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.progressBar}>
+            <View style={styles.progressFill} />
+          </View>
+
+          <View style={styles.goalItemActive}>
+            <Ionicons
+              name="checkmark-circle"
+              size={22}
+              color="#fff"
             />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+            <Text style={styles.goalText}>
+              Complete 2 History chapters
+            </Text>
+          </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+          <View style={styles.goalItem}>
+            <Ionicons
+              name="ellipse-outline"
+              size={22}
+              color="#fff"
+            />
+            <Text style={styles.goalText}>
+              Review Polity notes
+            </Text>
+          </View>
+
+          <View style={styles.goalItem}>
+            <Ionicons
+              name="ellipse-outline"
+              size={22}
+              color="#fff"
+            />
+            <Text style={styles.goalText}>
+              Practice 20 MCQs
+            </Text>
+          </View>
+        </LinearGradient>
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>
+            Continue Studying
+          </Text>
+          <Text style={styles.viewAll}>View all</Text>
+        </View>
+
+        <View style={styles.studyCardOrange}>
+          <View style={styles.studyIconOrange}>
+            <Ionicons name="newspaper-outline" size={22} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.studyTitle}>
+              GS 1: History & Culture
+            </Text>
+            <Text style={styles.studySubtitle}>
+              Ancient, Medieval & Modern India
+            </Text>
+            <View style={styles.topicPillOrange}>
+              <Text style={styles.topicTextOrange}>
+                24 Topics
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.arrowCircleOrange}>
+            <Ionicons name="chevron-forward" size={18} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.studyCardBlue}>
+          <View style={styles.studyIconBlue}>
+            <Ionicons name="business-outline" size={22} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.studyTitle}>
+              GS 2: Polity & Governance
+            </Text>
+            <Text style={styles.studySubtitle}>
+              Constitution, Polity & Social Justice
+            </Text>
+            <View style={styles.topicPillBlue}>
+              <Text style={styles.topicTextBlue}>
+                18 Topics
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.arrowCircleBlue}>
+            <Ionicons name="chevron-forward" size={18} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.progressCard}>
+          <Text style={styles.progressTitle}>
+            THIS WEEK'S PROGRESS
+          </Text>
+
+          <View style={styles.progressStats}>
+            <View style={styles.stat}>
+              <Text style={styles.statValueRed}>12</Text>
+              <Text style={styles.statLabel}>Chapters</Text>
+            </View>
+            <View style={styles.stat}>
+              <Text style={styles.statValueRed}>156</Text>
+              <Text style={styles.statLabel}>MCQs Done</Text>
+            </View>
+            <View style={styles.stat}>
+              <Text style={styles.statValueBlue}>8.5</Text>
+              <Text style={styles.statLabel}>Hours</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+export default HomeScreen;
