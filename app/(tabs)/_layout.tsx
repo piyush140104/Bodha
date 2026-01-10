@@ -1,8 +1,9 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { View } from "react-native";
 
-const TabLayout = ()=> {
+export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
@@ -10,8 +11,8 @@ const TabLayout = ()=> {
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 70,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
           position: "absolute",
           backgroundColor: "#FFFFFF",
         },
@@ -50,17 +51,22 @@ const TabLayout = ()=> {
       <Tabs.Screen
         name="favorites"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name={focused ? "bookmark" : "bookmark-outline"}
-              size={26}
-              color={focused ? "#F59E0B" : "#9CA3AF"}
-            />
+          tabBarIcon: () => (
+            <View
+              style={{
+                width: 38,
+                height: 31,
+                borderRadius: 10,
+                backgroundColor: "#F59E0B",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Ionicons name="star" size={24} color="#FFFFFF" />
+            </View>
           ),
         }}
       />
     </Tabs>
   );
-};
-
-export default TabLayout;
+}
